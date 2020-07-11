@@ -6,7 +6,6 @@ export default function Quote({number, initialText = '', timeout = 9000}) {
   const [text, setText] = useState(initialText);
 
   useEffect(() => {
-    let timerId
     async function fetcher () {
       const response = await fetchQuote('dummy' + number);
       if (response.status === "OK") {
@@ -17,14 +16,14 @@ export default function Quote({number, initialText = '', timeout = 9000}) {
       }
     }
     fetcher();
-    timerId = setTimeout(() => {
+    const timerId = setTimeout(() => {
       fetcher();      
     }, timeout);
     
     return () => {
       clearInterval(timerId)
     }
-  }, []);
+  }, [timeout, number]);
 
   return (
     <div className={'allblack text-light crazy crazy' + number}>

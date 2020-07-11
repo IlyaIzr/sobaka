@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
-import ReadDraft from './ReadDraft.js';
+import ReadDraft from '../components/projects/ReadDraft';
 
 const ProjectDetails = (props) => {
   const { project } = props;

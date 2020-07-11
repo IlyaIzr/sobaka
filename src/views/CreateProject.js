@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { createProject } from '../../store/actions/projectActions';
-import {Editor, EditorState, RichUtils, getDefaultKeyBinding, convertToRaw, convertFromRaw} from 'draft-js';
+import { createProject } from '../store/actions/projectActions';
+import { Editor, EditorState, RichUtils, getDefaultKeyBinding, convertToRaw, convertFromRaw } from 'draft-js';
 
 class CreateProject extends React.Component {
   constructor(props) {
@@ -17,7 +17,7 @@ class CreateProject extends React.Component {
     this.toggleBlockType = this._toggleBlockType.bind(this);
     this.toggleInlineStyle = this._toggleInlineStyle.bind(this);
     this.handleChange = this._handleChange.bind(this);
-    
+
     const content = window.localStorage.getItem('content');
 
     if (content) {
@@ -33,15 +33,15 @@ class CreateProject extends React.Component {
     editorState: EditorState.createEmpty()
   };
 
-  componentDidMount(){
+  componentDidMount() {
     this.refs.editor.focus();
   };
-  
+
   saveContent = (content) => {
     //console.log(content);    
     window.localStorage.setItem('content', JSON.stringify(convertToRaw(content)));
-    this.setState({content: JSON.stringify(convertToRaw(content))})
-  };  
+    this.setState({ content: JSON.stringify(convertToRaw(content)) })
+  };
   _handleChange(e) {
     this.setState({
       [e.target.id]: e.target.value
@@ -53,7 +53,7 @@ class CreateProject extends React.Component {
     if (this.state.content) {
       this.props.createProject(this.state)
     };
-    window.localStorage.removeItem("content");        
+    window.localStorage.removeItem("content");
     this.props.history.push('/');     //this is router property history, it'll push us back tu parentheses directory
   };
 
@@ -96,7 +96,7 @@ class CreateProject extends React.Component {
     );
   };
   render() {
-    const {editorState} = this.state;
+    const { editorState } = this.state;
     const { auth } = this.props
     //console.log(this.state.content.length)
     let className = 'RichEditor-editor form-group px-2 py-0 rounded ';
@@ -106,7 +106,7 @@ class CreateProject extends React.Component {
         className += ' RichEditor-hidePlaceholder';
       }
     };
-    
+
     return (
       <div className="container my-2 text-light">
         <div className="row">
@@ -114,50 +114,50 @@ class CreateProject extends React.Component {
           <div className="col-12 col-lg-8">
             <form className="" onSubmit={this.handleSubmit}>
               <fieldset>
-                <div className="form-group">                  
+                <div className="form-group">
                   <label htmlFor="title">Название</label>
                   <input className="form-control" type="text" id='title' onChange={this.handleChange} />
                 </div>
-              <div className="form-group">
-                    <div className={className} id="toInvis" onClick={this.focus}>
-                      <Editor           
-                        editorState={editorState}
-                        handleKeyCommand={this.handleKeyCommand}
-                        keyBindingFn={this.mapKeyToEditorCommand}
-                        onChange={this.onChange}
-                        ref="editor"
-                        spellCheck={true}
-                        className="form-control "
-                        id="content"
-                        placeholder="напишите что-то ниже"
-                      />
-                      <div className="RichEditor-root rounded mb-3 ">
-                    <InlineStyleControls
+                <div className="form-group">
+                  <div className={className} id="toInvis" onClick={this.focus}>
+                    <Editor
                       editorState={editorState}
-                      onToggle={this.toggleInlineStyle}
+                      handleKeyCommand={this.handleKeyCommand}
+                      keyBindingFn={this.mapKeyToEditorCommand}
+                      onChange={this.onChange}
+                      ref="editor"
+                      spellCheck={true}
+                      className="form-control "
+                      id="content"
+                      placeholder="напишите что-то ниже"
                     />
-                      
-                {(auth.uid) ?
-                    (this.state.content.length>135) ? (
-                    <div className="text-right text-dark">
-                    <button className="btn btn-outline-light btn-sm purple">Отправить</button>
-                    </div>) :
-                    (<div className="text-right text-light">
-                    <button className="btn btn-outline-light btn-sm" disabled data-toggle="tooltip"
-        data-placement="top" title="Напишите больше">не отправить...</button>
-                    </div>
-                    )
-                : 
-                <div className="text-muted text-right" data-toggle="tooltip"
-                data-placement="top" title="Вы можете зарегестрироваться">Вы не вошли в профиль, данные сохранятся в браузере
+                    <div className="RichEditor-root rounded mb-3 ">
+                      <InlineStyleControls
+                        editorState={editorState}
+                        onToggle={this.toggleInlineStyle}
+                      />
+
+                      {(auth.uid) ?
+                        (this.state.content.length > 135) ? (
+                          <div className="text-right text-dark">
+                            <button className="btn btn-outline-light btn-sm purple">Отправить</button>
+                          </div>) :
+                          (<div className="text-right text-light">
+                            <button className="btn btn-outline-light btn-sm" disabled data-toggle="tooltip"
+                              data-placement="top" title="Напишите больше">не отправить...</button>
+                          </div>
+                          )
+                        :
+                        <div className="text-muted text-right" data-toggle="tooltip"
+                          data-placement="top" title="Вы можете зарегестрироваться">Вы не вошли в профиль, данные сохранятся в браузере
                 </div>
-                }                      
+                      }
                     </div>
 
 
                   </div>
-              </div>
-              </fieldset> 
+                </div>
+              </fieldset>
             </form>
           </div>
         </div>
@@ -188,14 +188,14 @@ class StyleButton extends React.Component {
 };
 
 var INLINE_STYLES = [
-  {label: 'Bold ', style: 'BOLD'},
-  {label: 'Italic ', style: 'ITALIC'},
-  {label: 'Underline ', style: 'UNDERLINE'},
-  {label: 'Monospace ', style: 'CODE'},
+  { label: 'Bold ', style: 'BOLD' },
+  { label: 'Italic ', style: 'ITALIC' },
+  { label: 'Underline ', style: 'UNDERLINE' },
+  { label: 'Monospace ', style: 'CODE' },
 ];
 const InlineStyleControls = (props) => {
   const currentStyle = props.editorState.getCurrentInlineStyle();
-  
+
   return (
     <div className="RichEditor-controls">
       {INLINE_STYLES.map((type) =>
@@ -219,7 +219,7 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = (state) => {
   //console.log(state);
-  return{
+  return {
     auth: state.firebase.auth,
     profile: state.firebase.profile
   };

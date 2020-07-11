@@ -11,6 +11,4 @@ const rootReducer = combineReducers({
   firebase: firebaseReducer
 });
 
-export default rootReducer
-
-// the key name will be the data property on the state object
+export default rootReducer;

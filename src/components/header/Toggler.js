@@ -41,4 +41,3 @@ class Toggler extends Component {
 };
 
 export default Toggler;
-
