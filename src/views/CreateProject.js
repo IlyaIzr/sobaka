@@ -4,6 +4,7 @@ import { createProject } from '../store/actions/projectActions';
 import { Editor, EditorState, RichUtils, getDefaultKeyBinding, convertToRaw, convertFromRaw } from 'draft-js';
 import { useHistory } from 'react-router-dom';
 import InlineStyleControls from '../components/draftjs/InlineStyleControls';
+import SaveButtons from '../components/SaveButtons';
 
 const CreateProject = ({ createProject, auth }) => {
   const history = useHistory();
@@ -131,24 +132,8 @@ const CreateProject = ({ createProject, auth }) => {
                       editorState={editorState}
                       onToggle={toggleInlineStyle}
                     />
-
-                    {(auth.uid) ?
-                      (formState.content.length > 135) ? (
-                        <div className="text-right text-dark">
-                          <button className="btn btn-outline-light btn-sm purple">Отправить</button>
-                        </div>) :
-                        (<div className="text-right text-light">
-                          <button className="btn btn-outline-light btn-sm" disabled data-toggle="tooltip"
-                            data-placement="top" title="Напишите больше">не отправить...</button>
-                        </div>
-                        )
-                      :
-                      <div className="text-muted text-right" data-toggle="tooltip"
-                        data-placement="top" title="Вы можете зарегестрироваться"
-                      >
-                        Вы не вошли в профиль, данные сохранятся в браузере
-                      </div>
-                    }
+                    
+                    <SaveButtons uid={auth.uid} contentLength={formState.content.length}/>                    
                   </div>
 
                 </div>
