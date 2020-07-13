@@ -2,20 +2,19 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
-import ReadDraft from './ReadDraft.js';
+import ReadDraft from '../components/projects/ReadDraft';
 
-const ProjectDetails = (props) => {
-  const { project } = props;
+const ProjectDetails = ({ project }) => {
 
-  if (project) {      
+  if (project) {
     return (
       <div className="container my-2 text-light align-items-center">
-        <ReadDraft 
+        <ReadDraft
           title={project.title}
           content={project.content}
           authorFirstName={project.authorFirstName}
           createdAt={project.createdAt}
-        />           
+        />
       </div>
     )
   } else {

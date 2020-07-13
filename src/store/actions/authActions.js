@@ -1,6 +1,6 @@
 export const signIn = (credentials) => {
   return (dispatch, getState, {getFirebase}) => {
-    const firebase = getFirebase()
+    const firebase = getFirebase();
     
     firebase.auth().signInWithEmailAndPassword(
       credentials.email,
@@ -16,8 +16,7 @@ export const signIn = (credentials) => {
 
 export const signOut = () => {
   return (dispatch, getState, {getFirebase}) => {
-    const firebase = getFirebase(); // now we can use firebase
-
+    const firebase = getFirebase();
     firebase.auth().signOut().then(() => {
       dispatch({ type: 'SIGNOUT_SUCCESS' })
     });
