@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { signUp } from '../store/actions/authActions';
 
 const SignUp = ({ signUp, auth, authError }) => {
+  const history = useHistory();
   const [state, setState] = useState({
     email: '',
     password: '',
@@ -20,6 +21,7 @@ const SignUp = ({ signUp, auth, authError }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
+    history.push('/create');
     signUp(state);
   };
 

@@ -19,15 +19,17 @@ const App = ({ auth }) => {
             <Route exact path="/" component={Dashboard} />
             <Route path="/project/:id" component={ProjectDetails} />
             <Route path='/create' component={CreateProject} />
+            <Route path="/temp">reloading...</Route>
             <Route path="/" component={Page404} />
           </Switch>
           :
           <Switch>
-            <Route exact path="/" component={Dashboard} />
+            <Route exact path="/" component={CreateProject} />
             <Route path="/project/:id" component={ProjectDetails} />
             <Route path='/create' component={CreateProject} />
             <Route path='/signin' component={SignIn} />
             <Route path='/signup' component={SignUp} />
+            <Route path="/temp">reloading...</Route>
             <Route path="/" component={Page404} />
           </Switch>
         }

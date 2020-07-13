@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { signIn } from '../store/actions/authActions';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 
 const SignIn = ({ signIn, authError, auth }) => {
+  const history = useHistory();
   const [state, setState] = useState({
     email: '',
     password: ''
@@ -19,6 +20,7 @@ const SignIn = ({ signIn, authError, auth }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     signIn(state);
+    history.push('/create');
   };
 
   if (auth.uid) return <Redirect to='/' />

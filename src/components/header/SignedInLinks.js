@@ -1,14 +1,22 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { signOut } from '../../store/actions/authActions';
 
 const SignedInLinks = ({ signOut, profile }) => {
+  const history = useHistory();
+
+  const onClick = () => {
+    history.push('/temp');
+    history.goBack();
+    signOut();
+  };
+  
   return (
     <ul className="navbar-nav text-right">
       <li className="nav-item " data-toggle="collapse"
         data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"><NavLink to='/create' className="nav-link" >Написать</NavLink></li>
-      <li className="nav-item"><NavLink to='/create' className="nav-link" onClick={signOut} data-toggle="collapse"
+      <li className="nav-item"><NavLink to='/create' className="nav-link" onClick={onClick} data-toggle="collapse"
         data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">Выйти</NavLink></li>
       <li className="nav-item ">
         <NavLink to='/' className="nav-link">

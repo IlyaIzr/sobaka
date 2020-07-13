@@ -77,15 +77,6 @@ const CreateProject = ({ createProject, auth }) => {
     return getDefaultKeyBinding(e);
   };
 
-  const toggleBlockType = blockType => {
-    onChange(
-      RichUtils.toggleBlockType(
-        editorState,
-        blockType
-      )
-    );
-  };
-
   const toggleInlineStyle = inlineStyle => {
     onChange(
       RichUtils.toggleInlineStyle(

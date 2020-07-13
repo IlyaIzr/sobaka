@@ -3,12 +3,10 @@ import ProjectList from '../components/projects/ProjectList';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
-import { Redirect } from 'react-router-dom';
 
 class Dashboard extends Component {
   render() {
-    const { projects, auth } = this.props;
-    if (!auth.uid) return <Redirect to='/create' />
+    const { projects } = this.props;
     return (
       <div className="container my-2">
         <ProjectList projects={projects} />
